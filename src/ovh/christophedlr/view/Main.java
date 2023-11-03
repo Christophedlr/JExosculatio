@@ -12,6 +12,8 @@ public class Main extends JFrame {
     private Properties properties;
     private JMenuBar menuBar;
 
+    private JTabbedPane tabbedPane;
+
     public Main(Properties properties) {
         this.resourceBundle = ResourceBundle.getBundle("resources/lang/messages", locale);
         this.properties = properties;
@@ -19,6 +21,7 @@ public class Main extends JFrame {
         setSize(1280, 720);
         setTitle("JExosculatio - " + properties.getProperty("version"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         menuBar = new JMenuBar();
         addMenuFile();
         addMenuEdit();
@@ -29,6 +32,9 @@ public class Main extends JFrame {
         addMenuHelp();
         setJMenuBar(menuBar);
 
+        tabbedPane = new JTabbedPane();
+
+        add(tabbedPane);
         setVisible(true);
     }
 
