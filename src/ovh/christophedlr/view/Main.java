@@ -1,5 +1,7 @@
 package ovh.christophedlr.view;
 
+import ovh.christophedlr.controller.MainController;
+
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.util.Locale;
@@ -14,9 +16,13 @@ public class Main extends JFrame {
 
     private JTabbedPane tabbedPane;
 
+    private MainController mainController;
+
     public Main(Properties properties) {
         this.resourceBundle = ResourceBundle.getBundle("resources/lang/messages", locale);
         this.properties = properties;
+
+        mainController = new MainController(resourceBundle, properties);
 
         setSize(1280, 720);
         setTitle("JExosculatio - " + properties.getProperty("version"));
@@ -36,6 +42,8 @@ public class Main extends JFrame {
 
         add(tabbedPane);
         setVisible(true);
+
+        addListeners();
     }
 
     /**
@@ -280,5 +288,12 @@ public class Main extends JFrame {
         menuHelp.add(menuHelpAbout);
 
         menuBar.add(menuHelp);
+    }
+
+    /**
+     * Add listeners
+     */
+    public void addListeners() {
+        menuBar.getMenu(0).getItem(7).addActionListener(mainController.MenuFileExit(this));
     }
 }
